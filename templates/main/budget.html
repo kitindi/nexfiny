@@ -1,0 +1,255 @@
+{% extends "main/base.html" %} {% load static %}{% block content %}
+
+<main class="bg-gray-100 dark:bg-slate-900">
+  <!-- ========== MAIN CONTENT ========== -->
+  <!-- Sidebar Toggle -->
+  {% include "main/sidebar.html" %}
+  <!-- End Sidebar -->
+  <!-- ========== HEADER ========== -->
+  <header class="w-full px-16 sm:flex-nowrap z-50 bg-white border-b text-sm py-2.5 sm:py-4 dark:bg-slate-900 dark:border-gray-700">
+    <nav class="w-full flex basis-full items-center mx-auto px-4 sm:pr-6 sm:pl-60" aria-label="Global">
+      <div class="w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
+        <div class="sm:hidden">
+          <button
+            type="button"
+            class="inline-flex flex-shrink-0 justify-center items-center gap-2 size-[38px] rounded-full font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+          >
+            <svg
+              class="flex-shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="hidden sm:block">
+          <h3 class="text-[19px] font-medium text-slate-700">Budget</h3>
+        </div>
+
+        <div class="flex flex-row items-center justify-end gap-2">
+          <button
+            type="button"
+            class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          >
+            
+          </button>
+          <button
+            type="button"
+            class="hs-dropdown-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            data-hs-offcanvas="#hs-offcanvas-right"
+          >
+           
+            
+          </button>
+
+          <div class="hs-dropdown relative inline-flex items-center gap-7" data-hs-dropdown-placement="bottom-right">
+            <h3>{{ user.profile.full_name }}</h3>
+            <button
+              id="hs-dropdown-with-header"
+              type="button"
+              class="hs-dropdown-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
+            {% if user.is_authenticated %}<img
+            class=" rounded-full ring-2 ring-white dark:ring-gray-800"
+            src="{{user.profile.image.url}}"
+            alt="{{ user.username }}"
+          />{% endif %}
+              
+            </button>
+            <div class="">
+              <a href="{% url 'logout' %}" class="flex gap-3 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>Logout</a>
+            </div>
+
+            <div
+              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 z-10 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
+              aria-labelledby="hs-dropdown-with-header"
+            >
+              <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg dark:bg-gray-700">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Signed in as</p>
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-300">james@site.com</p>
+              </div>
+              <div class="mt-2 py-2 first:pt-0 last:pb-0">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                  </svg>
+                  Newsletter
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                  Purchases
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                    <path d="M12 12v9" />
+                    <path d="m8 17 4 4 4-4" />
+                  </svg>
+                  Downloads
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Team Account
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== END HEADER ========== -->
+  <!-- Content -->
+  <div class="w-full pt-5 px-16 sm:px-20 md:px-16 lg:ps-72 min-h-screen">
+    <div class="px-6 container grid grid-cols-12 mt-2 py-2 gap-3">
+      <div class="col-span-8"></div>
+      <div class="col-span-4 flex justify-end">
+        <a
+          href="{% url 'add_budget' %}"
+          class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-black text-white hover:bg-gray-800 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="#ededed" viewBox="0 0 256 256">
+            <path d="M224,128a8,8,0,0,1-8,8H136v80a8,8,0,0,1-16,0V136H40a8,8,0,0,1,0-16h80V40a8,8,0,0,1,16,0v80h80A8,8,0,0,1,224,128Z"></path>
+          </svg>
+          Add new budget
+        </a>
+      </div>
+    </div>
+    <div class="px-6 container grid grid-cols-12 mt-2 py-2 gap-3">
+      {% for budget in budgets %} {% comment %} card {% endcomment %}
+      <div class="col-span-4 bg-white p-4 rounded-lg">
+        <div class="px-4">
+          <span class="text-sm text-slate-500">{{ today|date:"F Y" }}</span>
+        </div>
+        <div class="flex justify-between p-4">
+          <h3 class="flex flex-col"><span class="text-[20px] text-slate-700 font-medium pb-2">{{ budget.category }}</span></h3>
+          <div class="w-8 h-8 flex justify-center items-center">
+            <a href="{% url "edit-budget" budget.id %}"
+              ><svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="#000000" viewBox="0 0 256 256">
+                <path
+                  d="M227.31,73.37,182.63,28.68a16,16,0,0,0-22.63,0L36.69,152A15.86,15.86,0,0,0,32,163.31V208a16,16,0,0,0,16,16H92.69A15.86,15.86,0,0,0,104,219.31L227.31,96a16,16,0,0,0,0-22.63ZM92.69,208H48V163.31l88-88L180.69,120ZM192,108.68,147.31,64l24-24L216,84.68Z"
+                ></path></svg
+            ></a>
+          </div>
+        </div>
+        <div class="p-4">
+          <p class="text-[18px] font-bold text-slate-600">Tsh {{ budget.amount }}</p>
+        </div>
+        <div class="px-4">
+          <!-- Progress -->
+          <div
+            class="flex w-full h-1.5 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"
+            role="progressbar"
+            aria-valuenow="25"
+            aria-valuemin="0"
+            aria-valuemax="100"
+          >
+            <div
+              class="flex flex-col justify-center rounded-full overflow-hidden bg-blue-600 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-blue-500"
+              style="width: 100%"
+            ></div>
+          </div>
+          <!-- End Progress -->
+        </div>
+        <div class="px-4 py-3">
+          <p class="text-sm text-slate-500">Patners sharing</p>
+          <div>
+            <div class="flex -space-x-2">
+              
+              {% if user.is_authenticated %}<img
+              class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-gray-800"
+              src="{{user.profile.image.url}}"
+              alt="{{ user.username }}"
+            />{% endif %}
+              <img
+                class="inline-block size-8 rounded-full ring-2 ring-white dark:ring-gray-800"
+                src="https://images.unsplash.com/photo-1531927557220-a9e23c1e4794?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=facearea&facepad=2&w=300&h=300&q=80"
+                alt="Image Description"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+      {% comment %} end of card {% endcomment %} {% endfor %}
+    </div>
+  </div>
+  <!-- End Content -->
+  <!-- ========== END MAIN CONTENT ========== -->
+</main>
+{% endblock content %}

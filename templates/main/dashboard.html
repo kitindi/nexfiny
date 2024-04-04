@@ -1,0 +1,627 @@
+{% extends "main/base.html" %} {% load static %}{% block content %}
+
+<main class="bg-gray-100 dark:bg-slate-900">
+  <!-- ========== MAIN CONTENT ========== -->
+  <!-- Sidebar Toggle -->
+  {% include "main/sidebar.html" %}
+  <!-- End Sidebar -->
+  <!-- ========== HEADER ========== -->
+  <header class="w-full px-16 sm:flex-nowrap z-50 bg-white border-b text-sm py-2.5 sm:py-4 dark:bg-slate-900 dark:border-gray-700">
+    <nav class="w-full flex basis-full items-center mx-auto px-4 sm:pr-6 sm:pl-60" aria-label="Global">
+      <div class="w-full flex items-center justify-end ms-auto sm:justify-between sm:gap-x-3 sm:order-3">
+        <div class="sm:hidden">
+          <button
+            type="button"
+            class="inline-flex flex-shrink-0 justify-center items-center gap-2 size-[38px] rounded-full font-medium bg-white text-gray-700 align-middle hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-400 focus:ring-offset-2 focus:ring-offset-white transition-all text-xs dark:bg-gray-800 dark:hover:bg-slate-800 dark:text-gray-400 dark:hover:text-white dark:focus:ring-gray-700 dark:focus:ring-offset-gray-800"
+          >
+            <svg
+              class="flex-shrink-0 size-4"
+              xmlns="http://www.w3.org/2000/svg"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <circle cx="11" cy="11" r="8" />
+              <path d="m21 21-4.3-4.3" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="hidden sm:block">
+          <h3 class="text-[19px] font-medium text-slate-700">Dashboard</h3>
+        </div>
+
+        <div class="flex flex-row items-center justify-end gap-2">
+          <button
+            type="button"
+            class="w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+          >
+            
+          </button>
+          <button
+            type="button"
+            class="hs-dropdown-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            data-hs-offcanvas="#hs-offcanvas-right"
+          >
+           
+            
+          </button>
+
+          <div class="hs-dropdown relative inline-flex items-center gap-7"  data-hs-dropdown-placement="bottom-right">
+            <h3>{{ user.profile.full_name }}</h3>
+            <button
+              id="hs-dropdown-with-header"
+              type="button"
+              class="hs-dropdown-toggle w-[2.375rem] h-[2.375rem] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-full text-gray-500 hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+            >
+            {% if user.is_authenticated %}<img
+            class=" rounded-full ring-2 ring-white dark:ring-gray-800"
+            src="{{user.profile.image.url}}"
+            alt="{{ user.username }}"
+          />{% endif %}
+              
+            </button>
+            <div class="">
+              <a href="{% url 'logout' %}" class="flex gap-3 items-center"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256"><path d="M120,216a8,8,0,0,1-8,8H48a8,8,0,0,1-8-8V40a8,8,0,0,1,8-8h64a8,8,0,0,1,0,16H56V208h56A8,8,0,0,1,120,216Zm109.66-93.66-40-40a8,8,0,0,0-11.32,11.32L204.69,120H112a8,8,0,0,0,0,16h92.69l-26.35,26.34a8,8,0,0,0,11.32,11.32l40-40A8,8,0,0,0,229.66,122.34Z"></path></svg>Logout</a>
+            </div>
+
+            <div
+              class="hs-dropdown-menu transition-[opacity,margin] duration hs-dropdown-open:opacity-100 opacity-0 hidden min-w-60 z-10 bg-white shadow-md rounded-lg p-2 dark:bg-gray-800 dark:border dark:border-gray-700"
+              aria-labelledby="hs-dropdown-with-header"
+            >
+              <div class="py-3 px-5 -m-2 bg-gray-100 rounded-t-lg dark:bg-gray-700">
+                <p class="text-sm text-gray-500 dark:text-gray-400">Signed in as</p>
+                <p class="text-sm font-medium text-gray-800 dark:text-gray-300">james@site.com</p>
+              </div>
+              <div class="mt-2 py-2 first:pt-0 last:pb-0">
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9" />
+                    <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0" />
+                  </svg>
+                  Newsletter
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z" />
+                    <path d="M3 6h18" />
+                    <path d="M16 10a4 4 0 0 1-8 0" />
+                  </svg>
+                  Purchases
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M4 14.899A7 7 0 1 1 15.71 8h1.79a4.5 4.5 0 0 1 2.5 8.242" />
+                    <path d="M12 12v9" />
+                    <path d="m8 17 4 4 4-4" />
+                  </svg>
+                  Downloads
+                </a>
+                <a
+                  class="flex items-center gap-x-3.5 py-2 px-3 rounded-lg text-sm text-gray-800 hover:bg-gray-100 focus:ring-2 focus:ring-blue-500 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-gray-300 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                  href="#"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2" />
+                    <circle cx="9" cy="7" r="4" />
+                    <path d="M22 21v-2a4 4 0 0 0-3-3.87" />
+                    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+                  </svg>
+                  Team Account
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nav>
+  </header>
+  <!-- ========== END HEADER ========== -->
+  <!-- Content -->
+  <div class="w-full pt-5 px-16 sm:px-20 md:px-16 lg:ps-72 min-h-screen">
+    <div class="px-6 container grid grid-cols-12 mt-2 py-2 gap-3">
+      <div class="col-span-8"><h2 class="text-[18px] font-medium text-slate-700">Overview</h2></div>
+      <div class="col-span-4 px-6"> 
+        <h3 class="text-[18px] text-slate-700 font-medium">Expense Breakdown</h3>
+      </div>
+      
+    </div>
+    <div class="px-6 container grid grid-cols-12 mt-2 py-2 gap-3">
+      <div class="col-span-8">
+        {% comment %} card- 1 {% endcomment %}
+        <div class="grid grid-cols-12 gap-5">
+          <div class="col-span-4 bg-white p-4 rounded-lg">
+            <div class="flex justify-between">
+              <h3 class="flex flex-col">
+                <span class="text-[16px] font-medium pb-2">Total Expenses</span><span class="text-sm text-slate-500">{{ today|date:"F Y" }}</span>
+              </h3>
+              <div class="w-8 h-8 flex justify-center items-center bg-green-300 rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256">
+                  <path
+                    d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,16V88H32V64Zm0,128H32V104H224v88Zm-16-24a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h32A8,8,0,0,1,208,168Zm-64,0a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h16A8,8,0,0,1,144,168Z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="py-4">
+              <p class="text-[18px] font-bold text-slate-600">Tsh {{ total_expenses }}</p>
+            </div>
+          </div>
+          <div class="col-span-4 bg-white p-4 rounded-lg">
+            <div class="flex justify-between">
+              <h3 class="flex flex-col">
+                <span class="text-[16px] font-medium pb-2">Total Budget</span><span class="text-sm text-slate-500">{{ today|date:"F Y" }}</span>
+              </h3>
+              <div class="w-8 h-8 flex justify-center items-center bg-green-300 rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256">
+                  <path
+                    d="M216,40H40A16,16,0,0,0,24,56V192a16,16,0,0,0,16,16H56v16a8,8,0,0,0,16,0V208H184v16a8,8,0,0,0,16,0V208h16a16,16,0,0,0,16-16V56A16,16,0,0,0,216,40Zm0,152H40V56H216v64H199.32a48,48,0,1,0,0,16H216v56Zm-50.16-72a16,16,0,1,0,0,16H183a32,32,0,1,1,0-16Z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="py-4">
+              <p class="text-[18px] font-bold text-slate-600">Tsh {{ total_budget }}</p>
+            </div>
+          </div>
+          <div class="col-span-4 bg-white p-4 rounded-lg">
+            <div class="flex justify-between">
+              <h3 class="flex flex-col">
+                <span class="text-[16px] font-medium pb-2">Balance</span><span class="text-sm text-slate-500">{{ today|date:"F Y" }}</span>
+              </h3>
+              <div class="w-8 h-8 flex justify-center items-center bg-green-300 rounded-sm">
+                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="#000000" viewBox="0 0 256 256">
+                  <path
+                    d="M224,48H32A16,16,0,0,0,16,64V192a16,16,0,0,0,16,16H224a16,16,0,0,0,16-16V64A16,16,0,0,0,224,48Zm0,16V88H32V64Zm0,128H32V104H224v88Zm-16-24a8,8,0,0,1-8,8H168a8,8,0,0,1,0-16h32A8,8,0,0,1,208,168Zm-64,0a8,8,0,0,1-8,8H120a8,8,0,0,1,0-16h16A8,8,0,0,1,144,168Z"
+                  ></path>
+                </svg>
+              </div>
+            </div>
+            <div class="py-4">
+              <p class="text-[18px] font-bold text-slate-600">TSh {{ balance }}</p>
+            </div>
+          </div>
+        </div>
+        {% comment %} card-2 {% endcomment %}
+        <div class="bg-white p-5 rounded-lg mt-4">
+          <h3 class="text-[16px] text-slate-700 font-medium pb-6 pt-2">Monthly Expenses in 2024</h3>
+          <div class="w-full h-[50vh]">
+          <canvas id="dash_bar" class="w-full"></canvas>
+        </div></div>
+        {% comment %} card-3 {% endcomment %}
+        <div class="bg-white p-5 rounded-lg my-4">
+          <h3 class="text-[18px] text-slate-700 font-medium my-8">Recent Activities</h3>
+          <h3 class="text-[16px] text-slate-700 font-medium mb-4">Latest Transactions</h3>
+          <div>
+            <!-- Table -->
+          <table class="w-full divide-y divide-gray-200 dark:divide-gray-700 mt-4 p-3">
+            <thead class="bg-gray-50 dark:bg-slate-800">
+              
+
+                <th  class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-sm font-semibold capitalize  tracking-wide text-gray-800 dark:text-gray-200">
+                      Merchant
+                    </span>
+                  </div>
+                </th>
+
+               
+
+                <th  class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-sm font-semibold capitalize  text-gray-800 dark:text-gray-200">
+                      Amount
+                    </span>
+                  </div>
+                </th>
+
+                <th  class="px-6 py-3 text-start">
+                  <div class="flex items-center gap-x-2">
+                    <span class="text-sm font-semibold capitalize  tracking-wide text-gray-800 dark:text-gray-200">
+                      Date
+                    </span>
+                  </div>
+                </th>
+
+                <th  class="px-6 py-3 text-start"> <span class="text-sm font-semibold capitalize  tracking-wide text-gray-800 dark:text-gray-200">
+                  Payment Method
+                </span></th>
+              </tr>
+            </thead>
+
+            <tbody class="divide-y divide-gray-200 dark:divide-gray-700">
+             
+             {% for expense in expenses %}
+             <tr>
+               
+              <td class="size-px whitespace-nowrap">
+                <div class="ps-6 lg:ps-3 xl:ps-0 pe-6 py-3">
+                  <div class="flex items-center gap-x-3">
+                          
+                      <span class="block text-sm text-gray-500">{{ expense.merchant }}</span>
+                    
+                  </div>
+                </div>
+              </td>
+              
+             
+              <td class="size-px whitespace-nowrap">
+                <div class="px-6 py-3">
+                  <div class="flex items-center gap-x-3">
+                    <span class="text-sm text-gray-500">Tsh {{ expense.amount }}</span>
+                    
+                  </div>
+                </div>
+              </td>
+              <td class="size-px whitespace-nowrap">
+                <div class="px-6 py-3">
+                  <span class="text-sm text-gray-500">{{ expense.date }}</span>
+                </div>
+              </td>
+              <td class="size-px whitespace-nowrap">
+                <div class="px-6 py-1.5">
+                  <p class="inline-flex items-center gap-x-1 text-sm text-blue-600  ">
+                    {{ expense.payment_method }}
+                  </p>
+                </div>
+              </td>
+            </tr>
+             {% endfor %}
+              
+            </tbody>
+          </table>
+          <!-- End Table -->
+
+          <!-- Footer -->
+          <div class="px-6 py-4 grid gap-3 md:flex md:justify-between md:items-center border-t border-gray-200 dark:border-gray-700">
+            <div>
+              <p class="text-sm text-gray-600 dark:text-gray-400">
+                Showing page
+                <span class="font-semibold text-gray-800 dark:text-gray-200">{{ expenses.number }}</span> of  <span class="font-semibold text-gray-800 dark:text-gray-200">{{ expenses.paginator.num_pages }}</span>
+              </p>
+            </div>
+
+            <div>
+              <div class="inline-flex gap-x-2">
+                  
+                {% if expenses.has_previous %}
+                <a
+                  href="?page={{expenses.previous_page_number}}"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m15 18-6-6 6-6" />
+                  </svg>
+                  Prev
+                </a>
+                {% endif %} {% if expenses.has_next %}
+                <a
+                  href="?page={{expenses.next_page_number}}"
+                  class="py-2 px-3 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-slate-900 dark:border-gray-700 dark:text-white dark:hover:bg-gray-800 dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+                >
+                  Next
+                  <svg
+                    class="flex-shrink-0 size-4"
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="24"
+                    height="24"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <path d="m9 18 6-6-6-6" />
+                  </svg>
+                </a>
+                {% endif %}
+
+                
+              </div>
+            </div>
+          </div>
+          <!-- End Footer -->
+          </div>
+        </div>
+      </div>
+      {% comment %} right column {% endcomment %}
+      <div class="col-span-4 px-6">
+       {% comment %} card - 1 {% endcomment %}
+        <div class="bg-white p-4 rounded-lg ">
+          <div class="w-full  h-[40vh] flex justify-center items-center">
+            <canvas id="dash_pie" class="w-full"></canvas>
+          </div>
+        </div>
+       {% comment %} card - 1 {% endcomment %}
+        <div class="py-4 mt-3">
+          <h3 class="text-[18px] text-slate-700 font-medium">Budget</h3>
+        </div>
+        {% comment %} card - 1 {% endcomment %}
+        <div class="bg-white p-4 rounded-lg">
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Education</span><span>Tsh {{ edu_budget }}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3" role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-green-400 text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-amber-500" style="{% if edu_percent == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ edu_percent }}%
+                {% endif %}
+                "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Groceries</span><span>Tsh {{ gro_budget }}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"  role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-gradient-to-r bg-green-400  text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-green-500" style="
+                {% if gro_percentage == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ gro_percentage }}%
+                {% endif %}
+                
+                  "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Transport</span><span>Tsh {{ trans_budget}}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"  role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-gradient-to-r bg-green-400  text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-green-500" style="
+                {% if trans_percent == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ trans_percent }}%
+                {% endif %}
+                
+                  "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Utilities</span><span>Tsh {{util_budget }}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"  role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-gradient-to-r bg-green-400  text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-green-500" style="
+                {% if util_percentage == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ util_percentage }}%
+                {% endif %}
+                
+                  "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Fixed expenses</span><span>Tsh {{ fixed_budget }}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"  role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-gradient-to-r bg-green-400  text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-amber-500" style="
+                {% if fixed_percentage == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ fixed_percentage }}%
+                {% endif %}
+                
+                  "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          <!--Budget card-->
+          <div class="py-3">
+            <div>
+              
+              <h3 class="text-[14px] text-slate-700 font-medium flex justify-between items-center"><span>Shopping</span><span>Tsh {{ shop_budget }}</span></h3>
+              <!-- Progress -->
+              <div class="flex w-full h-2 bg-gray-200 rounded-full overflow-hidden dark:bg-gray-700 mt-3"  role="progressbar" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100">
+                <div class="flex flex-col justify-center rounded-full overflow-hidden bg-gradient-to-r bg-green-400  text-xs text-white text-center whitespace-nowrap transition duration-500 dark:bg-green-500" style="
+                {% if shop_percentage == 0 %}
+                width: 0%
+                {% else %}
+                width: {{ shop_percentage }}%
+                {% endif %}
+                
+                  "></div>
+              </div>
+              <!-- End Progress -->
+              <h3 class="text-[13px] text-slate-700 font-medium my-2"></h3>
+            </div>
+            
+          </div>
+          <!--End of card-->
+          
+        </div>
+        </div>
+        
+        
+        </div>       
+        </div>
+      </div>
+    </div>
+  </div>
+  {{ redirect_to_login_immediately }}
+  <!-- End Content -->
+  <!-- ========== END MAIN CONTENT ========== -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{% static 'js/stats.js' %}"></script>
+<script>
+
+  const dash_bar = document.getElementById("dash_bar");
+new Chart(dash_bar, {
+  type: "bar",
+  data: {
+    labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
+    datasets: [
+      {
+        label: "TZSh",
+        data: {{expenses_data|safe}},
+        backgroundColor: "#282F44",
+        borderWidth: 0.2,
+        borderRadius: 0.9,
+      },
+      {
+        label: "TZSh",
+        data: {{savings_data|safe}},
+        backgroundColor: "#68D89B",
+        borderWidth: 0.2,
+        borderRadius: 0.9,
+      },
+    ],
+  },
+  options: {
+    plugins: {
+      legend: {
+          display: false
+      },
+  },
+    scales: {
+      // y: {
+      //   beginAtZero: true,
+      // },
+    },
+  },
+});
+
+
+const dash_pie = document.getElementById("dash_pie");
+new Chart(dash_pie, {
+  type: "doughnut",
+  data: {
+    labels: {{labels|safe}},
+    datasets: [
+      {
+        label: "TZSh",
+        data: {{data|safe}},
+        {% comment %} backgroundColor: ["#4ade80", "#14b8a6", "#374151", "#fcd34d", "#020617", "#f87171", "#0ea5e9", "#001f3f"], {% endcomment %}
+        borderWidth: 0.2,
+        borderRadius: 0.9,
+      },
+    ],
+  },
+  options: {
+    cutout: 120,
+    plugins: {
+      legend: {
+          display: false
+      },
+     
+  }
+    
+  },
+});
+
+
+</script>
+{{ redirect_to_login_immediately }}
+</main>
+{% endblock content %}
